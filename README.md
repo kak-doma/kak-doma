@@ -10,7 +10,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #27ae60;
@@ -24,7 +23,6 @@
             --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
         }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
@@ -35,8 +33,8 @@
             padding-bottom: 40px;
             position: relative;
             overflow-x: hidden;
+            zoom: 0.8; /* Масштаб 80% */
         }
-
         /* Фон в стиле видеокарт RTX */
         body::before {
             content: '';
@@ -66,7 +64,6 @@
             z-index: -1;
             opacity: 0.7;
         }
-
         /* Эффекты видеокарты */
         .gpu-effect {
             position: fixed;
@@ -76,7 +73,6 @@
             z-index: -1;
             opacity: 0.3;
         }
-
         .gpu-particle {
             position: absolute;
             width: 4px;
@@ -86,26 +82,22 @@
             box-shadow: 0 0 10px #27ae60, 0 0 20px #27ae60;
             animation: float 6s infinite ease-in-out;
         }
-
         @keyframes float {
             0%, 100% { transform: translateY(0) translateX(0); }
             25% { transform: translateY(-20px) translateX(10px); }
             50% { transform: translateY(10px) translateX(-15px); }
             75% { transform: translateY(-15px) translateX(5px); }
         }
-
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
         .container {
-            max-width: 1200px;
+            max-width: 1400px; /* Увеличен для 4 столбцов */
             margin: 0 auto;
             padding: 20px;
         }
-
         header {
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
@@ -121,7 +113,6 @@
             border-left: 4px solid var(--success-color);
             border-right: 4px solid var(--success-color);
         }
-
         header::before {
             content: '';
             position: absolute;
@@ -132,12 +123,10 @@
             background: linear-gradient(90deg, transparent, rgba(39, 174, 96, 0.1), transparent);
             animation: scanline 3s linear infinite;
         }
-
         @keyframes scanline {
             0% { transform: translateX(-100%); }
             100% { transform: translateX(100%); }
         }
-
         h1 {
             margin-bottom: 10px;
             font-size: 2.8em;
@@ -146,7 +135,6 @@
             text-shadow: 0 0 10px rgba(39, 174, 96, 0.5);
             letter-spacing: 2px;
         }
-
         .subtitle {
             color: rgba(255, 255, 255, 0.9);
             font-size: 1.3em;
@@ -154,20 +142,17 @@
             z-index: 1;
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
         }
-
         .auth-section {
             text-align: right;
             margin-bottom: 20px;
             position: relative;
             z-index: 1;
         }
-
         .auth-buttons {
             display: flex;
             gap: 15px;
             justify-content: flex-end;
         }
-
         .btn {
             padding: 12px 25px;
             border: none;
@@ -182,7 +167,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .btn::before {
             content: '';
             position: absolute;
@@ -193,81 +177,71 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: 0.5s;
         }
-
         .btn:hover::before {
             left: 100%;
         }
-
         .btn-primary {
             background: linear-gradient(45deg, var(--success-color), #219653);
             color: white;
             border: 2px solid var(--success-color);
         }
-
         .btn-secondary {
             background: linear-gradient(45deg, var(--success-color), #219653);
             color: white;
             border: 2px solid var(--success-color);
         }
-
         .btn-outline {
             background: transparent;
             border: 2px solid var(--success-color);
             color: var(--success-color);
         }
-
         .btn-danger {
             background: linear-gradient(45deg, var(--danger-color), #c0392b);
             color: white;
             border: 2px solid var(--danger-color);
         }
-
         .btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
-
         .search-bar {
             margin-bottom: 25px;
             text-align: center;
             background: rgba(0, 0, 0, 0.6);
-            padding: 25px;
+            padding: 20px; /* Уменьшено */
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            z-index: 1;
+            position: sticky; /* Закреплено сверху */
+            top: 0;
+            z-index: 10;
             border-left: 3px solid var(--success-color);
             border-right: 3px solid var(--success-color);
         }
-
         .search-bar input {
-            padding: 15px 20px;
+            padding: 12px 16px; /* Уменьшено */
             width: 100%;
             max-width: 500px;
             border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 25px;
-            font-size: 16px;
+            font-size: 14px; /* Уменьшено */
             outline: none;
             transition: var(--transition);
             background: rgba(255, 255, 255, 0.1);
             color: white;
             box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
         }
-
         .search-bar input::placeholder {
             color: rgba(255, 255, 255, 0.7);
         }
-
         .search-bar input:focus {
             border-color: var(--success-color);
             background: rgba(255, 255, 255, 0.15);
             box-shadow: 0 0 15px rgba(39, 174, 96, 0.5);
         }
-
         .search-bar button {
-            padding: 15px 30px;
+            padding: 12px 24px; /* Уменьшено */
             background: linear-gradient(45deg, var(--success-color), #219653);
             color: white;
             border: none;
@@ -278,21 +252,19 @@
             transition: var(--transition);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             border: 2px solid var(--success-color);
+            font-size: 14px; /* Уменьшено */
         }
-
         .search-bar button:hover {
             background: linear-gradient(45deg, #219653, var(--success-color));
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
         }
-
         .advertisements {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(4, 1fr); /* 4 столбца */
             gap: 25px;
             margin-bottom: 30px;
         }
-
         .advertisement {
             background: rgba(255, 255, 255, 0.05);
             border-radius: var(--border-radius);
@@ -306,13 +278,11 @@
             border-left: 3px solid var(--success-color);
             border-right: 3px solid var(--success-color);
         }
-
         .advertisement:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
             background: rgba(255, 255, 255, 0.08);
         }
-
         .advertisement::before {
             content: '';
             position: absolute;
@@ -323,7 +293,6 @@
             background: linear-gradient(90deg, var(--success-color), var(--success-color));
             z-index: 1;
         }
-
         .advertisement img {
             width: 100%;
             height: 200px;
@@ -333,14 +302,12 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
-
         .advertisement h3 {
             color: white;
             margin-bottom: 10px;
             font-size: 1.2em;
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
         }
-
         .price {
             font-size: 1.4em;
             font-weight: bold;
@@ -348,13 +315,11 @@
             margin-bottom: 10px;
             text-shadow: 0 0 10px rgba(39, 174, 96, 0.5);
         }
-
         .description {
             color: rgba(255, 255, 255, 0.8);
             margin-bottom: 15px;
             line-height: 1.5;
         }
-
         .info {
             display: flex;
             justify-content: space-between;
@@ -362,8 +327,8 @@
             font-size: 0.9em;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding-top: 10px;
+            flex-wrap: wrap; /* Для адаптивности */
         }
-
         .ad-id {
             background: rgba(39, 174, 96, 0.2);
             color: var(--success-color);
@@ -372,24 +337,15 @@
             font-weight: bold;
             margin-right: 10px;
         }
-
-        .delete-btn {
-            background: rgba(231, 76, 60, 0.2);
-            color: var(--danger-color);
-            border: 1px solid var(--danger-color);
-            padding: 5px 10px;
+        .category-tag {
+            background: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+            padding: 2px 8px;
             border-radius: 4px;
-            cursor: pointer;
+            font-weight: bold;
             font-size: 0.8em;
-            margin-left: 10px;
-            transition: all 0.3s ease;
+            margin-right: 10px;
         }
-
-        .delete-btn:hover {
-            background: rgba(231, 76, 60, 0.4);
-            transform: scale(1.05);
-        }
-
         .add-ad-btn {
             background: linear-gradient(45deg, #27ae60, #219653);
             color: white;
@@ -405,15 +361,13 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             border: 2px solid #27ae60;
         }
-
         .add-ad-btn:hover {
             background: linear-gradient(45deg, #219653, #27ae60);
             transform: scale(1.05);
             box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
         }
-
-        .delete-by-key-btn {
-            background: linear-gradient(45deg, var(--danger-color), #c0392b);
+        .support-btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
             color: white;
             padding: 10px 20px;
             border: none;
@@ -425,13 +379,13 @@
             display: inline-block;
             transition: var(--transition);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: 2px solid #3498db;
         }
-
-        .delete-by-key-btn:hover {
+        .support-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #2980b9, #3498db);
         }
-
         .user-info {
             background: rgba(0, 0, 0, 0.6);
             padding: 15px;
@@ -446,14 +400,12 @@
             border-left: 3px solid var(--success-color);
             border-right: 3px solid var(--success-color);
         }
-
         .user-info span {
             color: white;
             margin-right: 15px;
             font-weight: 500;
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
         }
-
         .modal {
             display: none;
             position: fixed;
@@ -468,12 +420,10 @@
             backdrop-filter: blur(5px);
             animation: fadeIn 0.3s ease;
         }
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
         .modal-content {
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             padding: 30px;
@@ -487,7 +437,6 @@
             border-right: 3px solid var(--success-color);
             backdrop-filter: blur(10px);
         }
-
         .close-modal {
             position: absolute;
             top: 15px;
@@ -503,17 +452,14 @@
             justify-content: center;
             border-radius: 50%;
         }
-
         .close-modal:hover {
             color: var(--success-color);
             background: rgba(39, 174, 96, 0.2);
             transform: rotate(90deg);
         }
-
         .form-group {
             margin-bottom: 20px;
         }
-
         .form-group label {
             display: block;
             margin-bottom: 8px;
@@ -521,8 +467,7 @@
             color: white;
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
         }
-
-        .form-group input {
+        .form-group input, .form-group select, .form-group textarea {
             width: 100%;
             padding: 15px;
             border: 2px solid rgba(255, 255, 255, 0.2);
@@ -533,39 +478,17 @@
             background: rgba(0, 0, 0, 0.3);
             color: white;
         }
-
-        .form-group input:focus {
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             border-color: var(--success-color);
             box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.3);
             background: rgba(0, 0, 0, 0.4);
         }
-
-        .form-group textarea {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: var(--border-radius);
-            font-size: 16px;
-            outline: none;
-            transition: var(--transition);
-            background: rgba(0, 0, 0, 0.3);
-            color: white;
-            resize: vertical;
-        }
-
-        .form-group textarea:focus {
-            border-color: var(--success-color);
-            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.3);
-            background: rgba(0, 0, 0, 0.4);
-        }
-
         .file-upload {
             position: relative;
             overflow: hidden;
             display: inline-block;
             width: 100%;
         }
-
         .file-upload input[type="file"] {
             position: absolute;
             left: 0;
@@ -575,7 +498,6 @@
             height: 100%;
             cursor: pointer;
         }
-
         .file-upload-label {
             display: block;
             padding: 15px;
@@ -587,34 +509,28 @@
             cursor: pointer;
             transition: var(--transition);
         }
-
         .file-upload-label:hover {
             background: rgba(39, 174, 96, 0.3);
         }
-
         .file-upload-preview {
             margin-top: 10px;
             text-align: center;
             color: white;
         }
-
         .file-upload-preview img {
             max-width: 100%;
             max-height: 150px;
             border-radius: var(--border-radius);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
-
         .form-buttons {
             display: flex;
             gap: 10px;
             margin-top: 20px;
         }
-
         .form-buttons .btn {
             flex: 1;
         }
-
         .error-message {
             color: var(--success-color);
             margin-top: 5px;
@@ -622,7 +538,6 @@
             text-align: center;
             text-shadow: 0 0 5px rgba(39, 174, 96, 0.5);
         }
-
         .success-message {
             color: var(--success-color);
             margin-top: 5px;
@@ -630,7 +545,6 @@
             text-align: center;
             text-shadow: 0 0 5px rgba(39, 174, 96, 0.5);
         }
-
         .system-theme {
             position: fixed;
             bottom: 20px;
@@ -650,24 +564,20 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             animation: pulse 2s infinite;
         }
-
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(39, 174, 96, 0.4); }
             70% { box-shadow: 0 0 0 10px rgba(39, 174, 96, 0); }
             100% { box-shadow: 0 0 0 0 rgba(39, 174, 96, 0); }
         }
-
         .system-theme:hover {
             transform: scale(1.1);
             background: rgba(39, 174, 96, 0.3);
         }
-
         .system-theme i {
             color: white;
             font-size: 24px;
             text-shadow: 0 0 10px rgba(39, 174, 96, 0.5);
         }
-
         .contact-info {
             text-align: center;
             margin-top: 20px;
@@ -679,27 +589,22 @@
             position: relative;
             z-index: 1;
         }
-
         .contact-email {
             color: var(--success-color);
             cursor: pointer;
             text-decoration: underline;
             transition: var(--transition);
         }
-
         .contact-email:hover {
             color: #3498db;
             text-decoration: none;
         }
-
         .hidden-email {
             display: none;
         }
-
         .visible-email {
             display: inline;
         }
-
         /* Инструкция по выкладыванию объявлений */
         .instructions {
             background: rgba(39, 174, 96, 0.1);
@@ -711,23 +616,19 @@
             position: relative;
             z-index: 1;
         }
-
         .instructions h3 {
             color: var(--success-color);
             margin-bottom: 15px;
             text-align: center;
         }
-
         .instructions ol {
             padding-left: 20px;
             margin-bottom: 15px;
         }
-
         .instructions li {
             margin-bottom: 10px;
             line-height: 1.5;
         }
-
         .instructions p {
             margin-top: 10px;
             padding: 10px;
@@ -735,7 +636,6 @@
             border-radius: var(--border-radius);
             border-left: 3px solid var(--danger-color);
         }
-
         .filter-warning {
             background: rgba(241, 196, 15, 0.1);
             border: 1px solid rgba(241, 196, 15, 0.3);
@@ -745,29 +645,10 @@
             color: #f1c40f;
             text-align: center;
         }
-
-        .security-banner {
-            background: rgba(231, 76, 60, 0.2);
-            color: #e74c3c;
-            padding: 10px;
-            border-radius: var(--border-radius);
-            margin: 10px 0;
-            text-align: center;
-            font-size: 0.9em;
-            border: 1px solid rgba(231, 76, 60, 0.3);
+        /* Скрыты баннеры */
+        .security-banner, .realtime-status {
+            display: none;
         }
-
-        .realtime-status {
-            background: rgba(52, 152, 219, 0.2);
-            color: #3498db;
-            padding: 10px;
-            border-radius: var(--border-radius);
-            margin: 10px 0;
-            text-align: center;
-            font-size: 0.9em;
-            border: 1px solid rgba(52, 152, 219, 0.3);
-        }
-
         footer {
             text-align: center;
             margin-top: 30px;
@@ -778,32 +659,36 @@
             z-index: 1;
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
         }
-
-        @media (max-width: 768px) {
+        @media (max-width: 1200px) {
+            .advertisements {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 900px) {
+            .advertisements {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 600px) {
             .advertisements {
                 grid-template-columns: 1fr;
             }
-            
             .search-bar input {
                 width: 100%;
                 margin-right: 0;
                 margin-bottom: 10px;
             }
-            
             .auth-buttons {
                 flex-direction: column;
                 align-items: flex-end;
             }
-            
             .btn {
                 width: 100%;
                 margin-bottom: 5px;
             }
-            
             h1 {
                 font-size: 2.2em;
             }
-            
             .subtitle {
                 font-size: 1.1em;
             }
@@ -813,23 +698,19 @@
 <body>
     <!-- Эффекты видеокарты -->
     <div class="gpu-effect" id="gpuEffect"></div>
-
     <div class="container">
         <header>
             <h1>ЖелезныеРешения</h1>
             <p class="subtitle">Объявления о продаже электроники</p>
         </header>
-
-        <!-- Realtime Database статус -->
+        <!-- Realtime Database статус - СКРЫТ -->
         <div class="realtime-status">
             🔥 Realtime Database подключен ✅
         </div>
-
-        <!-- Защита от DDoS -->
+        <!-- Защита от DDoS - СКРЫТА -->
         <div class="security-banner">
             🔒 Защита от DDoS атак и взломов активна
         </div>
-
         <!-- Инструкция по выкладыванию объявлений -->
         <div class="instructions">
             <h3>Инструкция по выкладыванию объявлений</h3>
@@ -840,7 +721,6 @@
             </ol>
             <p>⚠️ Объявления с нарушением правил будут удалены без предупреждения!</p>
         </div>
-
         <!-- Предупреждение о фильтрации -->
         <div class="filter-warning">
             🛡️ Все объявления автоматически фильтруются на предмет:
@@ -851,32 +731,26 @@
                 <li>Нарушений правил сайта</li>
             </ul>
         </div>
-
         <div class="auth-section">
             <div class="auth-buttons">
                 <button class="btn btn-outline" onclick="openModal('loginModal')">Вход</button>
                 <button class="btn btn-outline" onclick="openModal('registerModal')">Регистрация</button>
             </div>
         </div>
-
         <div class="user-info" id="userInfo" style="display: none;">
             <span id="currentUser"></span>
             <button class="btn btn-outline" onclick="logout()">Выход</button>
         </div>
-
         <div class="search-bar">
             <input type="text" id="searchInput" placeholder="Поиск по объявлениям...">
             <button onclick="searchAds()">Найти</button>
         </div>
-
         <button class="add-ad-btn" onclick="showAddForm()" id="addAdBtn" style="display: none;">Добавить объявление</button>
-
-        <button class="delete-by-key-btn" onclick="openModal('deleteByKeyModal')">Удалить объявление по ключу</button>
-
+        <!-- Кнопка поддержки сайта -->
+        <button class="support-btn" onclick="openModal('supportModal')">Поддержать сайт</button>
         <div class="advertisements" id="adsContainer">
             <!-- Объявления будут добавляться здесь -->
         </div>
-
         <div class="contact-info">
             <p>Есть вопросы? Есть предложение о сотрудничестве?</p>
             <p>Пишите сюда: 
@@ -885,7 +759,6 @@
             <p class="hidden-email" id="hiddenEmail">poddershka24@gmail.com</p>
         </div>
     </div>
-
     <!-- Модальное окно регистрации -->
     <div id="registerModal" class="modal">
         <div class="modal-content">
@@ -903,6 +776,11 @@
                 <label for="regConfirmPassword">Подтвердите пароль:</label>
                 <input type="password" id="regConfirmPassword" placeholder="Подтвердите пароль">
             </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="rememberMeReg"> Запомнить меня
+                </label>
+            </div>
             <div class="form-buttons">
                 <button class="btn btn-secondary" onclick="registerUser()">Зарегистрироваться</button>
                 <button class="btn btn-outline" onclick="closeModal('registerModal')">Отмена</button>
@@ -910,7 +788,6 @@
             <div id="registerMessage"></div>
         </div>
     </div>
-
     <!-- Модальное окно входа -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
@@ -924,6 +801,11 @@
                 <label for="loginPassword">Пароль:</label>
                 <input type="password" id="loginPassword" placeholder="Введите пароль">
             </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="rememberMe"> Запомнить меня
+                </label>
+            </div>
             <div class="form-buttons">
                 <button class="btn btn-primary" onclick="loginUser()">Войти</button>
                 <button class="btn btn-outline" onclick="closeModal('loginModal')">Отмена</button>
@@ -931,7 +813,6 @@
             <div id="loginMessage"></div>
         </div>
     </div>
-
     <!-- Модальное окно добавления объявления -->
     <div id="addAdModal" class="modal">
         <div class="modal-content">
@@ -940,6 +821,28 @@
             <div class="form-group">
                 <label for="adTitle">Название:</label>
                 <input type="text" id="adTitle" placeholder="Введите название товара">
+            </div>
+            <!-- Выбор категории -->
+            <div class="form-group">
+                <label for="adCategory">Категория:</label>
+                <select id="adCategory">
+                    <option value="ноутбуки">Ноутбуки</option>
+                    <option value="телефоны">Телефоны</option>
+                    <option value="планшеты">Планшеты</option>
+                    <option value="наушники">Наушники</option>
+                    <option value="мониторы">Мониторы</option>
+                    <option value="клавиатуры">Клавиатуры</option>
+                    <option value="мыши">Мыши</option>
+                    <option value="видеокарты">Видеокарты</option>
+                    <option value="процессоры">Процессоры</option>
+                    <option value="материнские платы">Материнские платы</option>
+                    <option value="оперативная память">Оперативная память</option>
+                    <option value="ssd">SSD</option>
+                    <option value="hdd">HDD</option>
+                    <option value="блоки питания">Блоки питания</option>
+                    <option value="системы охлаждения">Системы охлаждения</option>
+                    <option value="другое">Другое</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="adPrice">Цена (₽):</label>
@@ -968,42 +871,33 @@
             <div id="addAdMessage"></div>
         </div>
     </div>
-
-    <!-- Модальное окно удаления по ключу -->
-    <div id="deleteByKeyModal" class="modal">
+    <!-- Модальное окно поддержки сайта -->
+    <div id="supportModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('deleteByKeyModal')">&times;</span>
-            <h2 style="text-align: center; margin-bottom: 20px; color: white;">Удаление по ключу доступа</h2>
-            <div class="form-group">
-                <label for="deleteKey">Ключ доступа:</label>
-                <input type="password" id="deleteKey" placeholder="Введите ключ доступа">
+            <span class="close-modal" onclick="closeModal('supportModal')">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 20px; color: white;">Поддержать сайт</h2>
+            <div style="background: rgba(52, 152, 219, 0.1); border: 1px solid rgba(52, 152, 219, 0.3); border-radius: var(--border-radius); padding: 20px; margin: 20px 0; text-align: center; color: white;">
+                <p>Если вам нравится наш сайт и вы хотите поддержать его развитие, вы можете сделать пожертвование через QIWI кошелек.</p>
+                <p>Спасибо за вашу поддержку!</p>
+                <div style="font-size: 1.2em; font-weight: bold; color: #3498db; margin: 15px 0; padding: 10px; background: rgba(0, 0, 0, 0.3); border-radius: var(--border-radius); border: 1px solid rgba(52, 152, 219, 0.3);">
+                    +79022430888
+                    <button class="copy-btn" onclick="copyQiwiNumber()" style="background: rgba(52, 152, 219, 0.2); color: #3498db; border: 1px solid #3498db; padding: 8px 15px; border-radius: 20px; cursor: pointer; transition: var(--transition); margin-left: 10px;">Копировать</button>
+                </div>
+                <p>Пожалуйста, укажите в комментарии к платежу, что это поддержка сайта "ЖелезныеРешения".</p>
             </div>
-            <div class="form-group">
-                <label for="deleteAdId">ID объявления для удаления:</label>
-                <input type="number" id="deleteAdId" placeholder="Введите ID объявления">
-            </div>
-            <div class="form-buttons">
-                <button class="btn btn-danger" onclick="deleteAdvertisementByKey()">Удалить объявление</button>
-                <button class="btn btn-outline" onclick="closeModal('deleteByKeyModal')">Отмена</button>
-            </div>
-            <div id="deleteMessage"></div>
         </div>
     </div>
-
     <!-- Системная тема -->
     <div class="system-theme" onclick="toggleSystemTheme()">
         <i>⚙️</i>
     </div>
-
     <footer>
         <p>&copy; 2024 ЖелезныеРешения - Объявления о продаже электроники. Все права защищены.</p>
     </footer>
-
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-
     <script>
         // Firebase configuration
         const firebaseConfig = {
@@ -1015,12 +909,11 @@
             messagingSenderId: "527918485360",
             appId: "1:527918485360:web:180b3899827e2b1cd749b5"
         };
-
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
         const auth = firebase.auth();
-
+        
         // Создаем частицы для эффекта видеокарты
         function createGPUParticles() {
             const gpuEffect = document.getElementById('gpuEffect');
@@ -1035,148 +928,63 @@
                 gpuEffect.appendChild(particle);
             }
         }
-
-        // Защита от DDoS и взломов
-        class SecurityManager {
-            constructor() {
-                this.requestCount = 0;
-                this.maxRequests = 100;
-                this.timeWindow = 60000; // 1 минута
-                this.requestTimes = [];
-                this.blockedIps = new Set();
-                this.initSecurity();
-            }
-
-            initSecurity() {
-                // Ограничение количества запросов
-                setInterval(() => {
-                    this.cleanupOldRequests();
-                }, 10000);
-            }
-
-            cleanupOldRequests() {
-                const now = Date.now();
-                this.requestTimes = this.requestTimes.filter(time => now - time < this.timeWindow);
-            }
-
-            checkRateLimit() {
-                const now = Date.now();
-                this.requestTimes.push(now);
-                this.requestCount++;
-
-                // Проверка на превышение лимита
-                if (this.requestTimes.length > this.maxRequests) {
-                    console.warn("Превышен лимит запросов - возможна DDoS атака");
-                    return false;
-                }
-                return true;
-            }
-
-            // Блокировка IP (в реальном приложении это будет на сервере)
-            blockIP(ip) {
-                this.blockedIps.add(ip);
-                console.warn("IP заблокирован:", ip);
-            }
-
-            isBlocked(ip) {
-                return this.blockedIps.has(ip);
-            }
-        }
-
-        // Инициализация системы безопасности
-        const securityManager = new SecurityManager();
-
-        // Пример проверки безопасности для критических функций
-        function secureFunction(func) {
-            return function(...args) {
-                if (!securityManager.checkRateLimit()) {
-                    alert("Сайт временно недоступен из-за высокой нагрузки. Пожалуйста, попробуйте позже.");
-                    return;
-                }
-                return func.apply(this, args);
-            };
-        }
-
-        // Пример защиты для функций, которые могут быть подвержены атакам
-        const secureDisplayAdvertisements = secureFunction(displayAdvertisements);
-        const secureSearchAds = secureFunction(searchAds);
-        const secureCreateAdvertisement = secureFunction(createAdvertisement);
-
+        
         // Пример данных пользователей
         let users = JSON.parse(localStorage.getItem('users')) || [];
-        
         // Текущий пользователь
         let currentUser = null;
-
-        // Ключ доступа для удаления
-        const DELETE_ACCESS_KEY = "kluchi_H39J-S@87903H5KL967-fa2EQ-Kl";
-
         // Пример данных объявлений
         let advertisements = [];
-
+        
         // Фильтрация текста от матерного контента
         function filterText(text) {
-            const badWords = ['ебать', 'ебать', 'ебать', 'нахуй', 'нахуй', 'нахуй', 'пошел', 'пошел', 'пошел', 
-                             'сука', 'сука', 'сука', 'пиздец', 'пиздец', 'пиздец', 'бля', 'бля', 'бля'];
-            
-            let filteredText = text.toLowerCase();
-            
+            const badWords = ['ебать', 'нахуй', 'пошел', 'сука', 'пиздец', 'бля'];
+            let filteredText = text;
             // Проверяем наличие запрещенных слов
             for (const word of badWords) {
-                if (filteredText.includes(word)) {
-                    return text.replace(new RegExp(word, 'gi'), '***');
-                }
+                const regex = new RegExp(word, 'gi');
+                filteredText = filteredText.replace(regex, '***');
             }
-            
-            return text;
+            return filteredText;
         }
-
+        
         // Проверка на 18+ контент
         function checkAdultContent(text) {
-            const adultKeywords = ['18+', '18+', '18+', 'adult', 'adult', 'adult', 'xxx', 'xxx', 'xxx', 
-                                 'порно', 'порно', 'порно', 'секс', 'секс', 'секс', 'эротик', 'эротик', 'эротик'];
-            
+            const adultKeywords = ['18+', 'adult', 'xxx', 'порно', 'секс', 'эротик'];
             const lowerText = text.toLowerCase();
-            
             for (const keyword of adultKeywords) {
                 if (lowerText.includes(keyword)) {
                     return true;
                 }
             }
-            
             return false;
         }
-
+        
         // Проверка объявления на соответствие правилам
         function validateAdvertisement(title, description, contact) {
             // Проверка на матерный контент
             if (checkAdultContent(title) || checkAdultContent(description)) {
                 return { valid: false, error: "Объявление содержит запрещенный контент!" };
             }
-            
             // Проверка на наличие контактной информации
             if (!contact || contact.trim().length < 5) {
                 return { valid: false, error: "Пожалуйста, укажите контактную информацию" };
             }
-            
             // Проверка на минимальную длину описания
             if (description.length < 10) {
                 return { valid: false, error: "Описание должно содержать минимум 10 символов" };
             }
-            
             // Проверка на максимальную длину
             if (title.length > 100 || description.length > 500) {
                 return { valid: false, error: "Слишком длинное описание или название" };
             }
-            
             return { valid: true, error: null };
         }
-
+        
         // Отображение объявлений
         function displayAdvertisements(adsToShow = advertisements) {
             const container = document.getElementById('adsContainer');
             container.innerHTML = '';
-
             adsToShow.forEach(ad => {
                 const adElement = document.createElement('div');
                 adElement.className = 'advertisement';
@@ -1186,41 +994,42 @@
                     <div class="price">${ad.price} ₽</div>
                     <div class="description">${filterText(ad.description)}</div>
                     <div class="info">
-                        <span><span class="ad-id">ID: ${ad.id}</span> Автор: ${ad.author}</span>
-                        <span>${formatDate(ad.date)}</span>
-                        ${currentUser && (currentUser.id === ad.userId || currentUser.username === "admin") ? 
-                            `<button class="delete-btn" onclick="deleteAdvertisement(${ad.id})">Удалить</button>` : ''}
+                        <div>
+                            <span class="ad-id">ID: ${ad.id}</span>
+                            <span class="category-tag">${ad.category}</span>
+                            <span>Автор: ${ad.author}</span>
+                        </div>
+                        <div>
+                            <span>${formatDate(ad.date)}</span>
+                        </div>
                     </div>
                 `;
                 container.appendChild(adElement);
             });
         }
-
+        
         // Форматирование даты
         function formatDate(dateString) {
             const date = new Date(dateString);
             return date.toLocaleDateString('ru-RU');
         }
-
+        
         // Поиск объявлений
         function searchAds() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            
             if (!searchTerm.trim()) {
                 displayAdvertisements();
                 return;
             }
-
             const filteredAds = advertisements.filter(ad => 
                 ad.title.toLowerCase().includes(searchTerm) ||
                 ad.description.toLowerCase().includes(searchTerm) ||
                 ad.category.toLowerCase().includes(searchTerm) ||
                 ad.contact.toLowerCase().includes(searchTerm)
             );
-
             displayAdvertisements(filteredAds);
         }
-
+        
         // Показ формы добавления объявления
         function showAddForm() {
             if (!currentUser) {
@@ -1230,7 +1039,7 @@
             }
             openModal('addAdModal');
         }
-
+        
         // Предварительный просмотр изображения
         function previewImage(input) {
             const preview = document.getElementById('imagePreview');
@@ -1244,53 +1053,51 @@
                 preview.innerHTML = '';
             }
         }
-
+        
         // Создание нового объявления
         async function createAdvertisement() {
             if (!currentUser) {
                 alert('Пожалуйста, войдите в систему');
                 return;
             }
-
             const title = document.getElementById('adTitle').value;
+            const category = document.getElementById('adCategory').value;
             const price = document.getElementById('adPrice').value;
             const description = document.getElementById('adDescription').value;
             const contact = document.getElementById('adContact').value;
             const fileInput = document.getElementById('adImageFile');
-            
             // Валидация
             const validation = validateAdvertisement(title, description, contact);
             if (!validation.valid) {
                 document.getElementById('addAdMessage').innerHTML = `<div class="error-message">${validation.error}</div>`;
                 return;
             }
-
             // Получаем URL изображения
             let imageUrl = "https://via.placeholder.com/300x200?text=Новое+объявление";
             if (fileInput.files && fileInput.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     imageUrl = e.target.result;
-                    // Создаем объявление с выбранным изображением
-                    createAdvertisementWithImage(title, price, description, contact, imageUrl);
+                    // Создаем объявление с выбранным изображением и категорией
+                    createAdvertisementWithImage(title, category, price, description, contact, imageUrl);
                 }
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
-                // Создаем объявление с дефолтным изображением
-                createAdvertisementWithImage(title, price, description, contact, imageUrl);
+                // Создаем объявление с дефолтным изображением и категорией
+                createAdvertisementWithImage(title, category, price, description, contact, imageUrl);
             }
         }
-
+        
         // Вспомогательная функция для создания объявления
-        async function createAdvertisementWithImage(title, price, description, contact, imageUrl) {
+        async function createAdvertisementWithImage(title, category, price, description, contact, imageUrl) {
             try {
                 // Генерируем уникальный ID для Realtime Database
                 const newAdKey = database.ref().child('advertisements').push().key;
-                
-                // Создаем данные для объявления
+                // Создаем данные для объявления с категорией
                 const adData = {
                     id: newAdKey,
                     title: title,
+                    category: category,
                     price: price,
                     description: description,
                     contact: contact,
@@ -1298,70 +1105,65 @@
                     date: new Date().toISOString().split('T')[0],
                     author: currentUser.username,
                     userId: currentUser.id,
-                    category: "электроника",
                     createdAt: firebase.database.ServerValue.TIMESTAMP
                 };
-
                 // Добавляем в Realtime Database
                 await database.ref('advertisements/' + newAdKey).set(adData);
-                
                 // Добавляем в локальный массив
                 advertisements.push(adData);
                 displayAdvertisements();
                 closeModal('addAdModal');
-                
                 // Очищаем поля формы
                 document.getElementById('adTitle').value = '';
+                document.getElementById('adCategory').value = 'ноутбуки';
                 document.getElementById('adPrice').value = '';
                 document.getElementById('adDescription').value = '';
                 document.getElementById('adContact').value = '';
                 document.getElementById('adImageFile').value = '';
                 document.getElementById('imagePreview').innerHTML = '';
-                
                 document.getElementById('addAdMessage').innerHTML = '<div class="success-message">Объявление успешно добавлено!</div>';
             } catch (error) {
                 console.error("Ошибка при добавлении объявления:", error);
                 document.getElementById('addAdMessage').innerHTML = '<div class="error-message">Ошибка при добавлении объявления</div>';
             }
         }
-
+        
         // Регистрация пользователя
         async function registerUser() {
             const username = document.getElementById('regUsername').value;
             const password = document.getElementById('regPassword').value;
             const confirmPassword = document.getElementById('regConfirmPassword').value;
+            const rememberMe = document.getElementById('rememberMeReg').checked;
             const messageDiv = document.getElementById('registerMessage');
-
             // Проверка валидности
             if (!username || !password) {
                 messageDiv.innerHTML = '<div class="error-message">Пожалуйста, заполните все поля</div>';
                 return;
             }
-
             if (password !== confirmPassword) {
                 messageDiv.innerHTML = '<div class="error-message">Пароли не совпадают</div>';
                 return;
             }
-
             if (password.length < 6) {
                 messageDiv.innerHTML = '<div class="error-message">Пароль должен быть не менее 6 символов</div>';
                 return;
             }
-
             try {
                 // Регистрация в Firebase Auth
                 const userCredential = await auth.createUserWithEmailAndPassword(username + '@example.com', password);
                 const user = userCredential.user;
-                
                 // Сохраняем данные пользователя в Realtime Database
                 await database.ref('users/' + user.uid).set({
                     username: username,
                     email: user.email,
                     createdAt: firebase.database.ServerValue.TIMESTAMP
                 });
-                
                 messageDiv.innerHTML = '<div class="success-message">Регистрация прошла успешно!</div>';
-                
+                // Сохраняем данные в cookie, если "Запомнить меня" отмечено
+                if (rememberMe) {
+                    setCookie('rememberedUsername', username, 30);
+                    setCookie('rememberedPassword', password, 30);
+                }
                 // Автоматический вход после регистрации
                 setTimeout(() => {
                     currentUser = {
@@ -1379,35 +1181,39 @@
                 messageDiv.innerHTML = '<div class="error-message">' + error.message + '</div>';
             }
         }
-
+        
         // Вход пользователя
         async function loginUser() {
             const username = document.getElementById('loginUsername').value;
             const password = document.getElementById('loginPassword').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
             const messageDiv = document.getElementById('loginMessage');
-
             if (!username || !password) {
                 messageDiv.innerHTML = '<div class="error-message">Пожалуйста, заполните все поля</div>';
                 return;
             }
-
             try {
                 // Вход в Firebase Auth
                 const userCredential = await auth.signInWithEmailAndPassword(username + '@example.com', password);
                 const user = userCredential.user;
-                
                 // Получаем данные пользователя из Realtime Database
                 const userSnapshot = await database.ref('users/' + user.uid).once('value');
                 const userData = userSnapshot.val();
-                
                 currentUser = {
                     id: user.uid,
                     username: userData.username
                 };
-                
                 updateAuthUI();
+                // Сохраняем данные в cookie, если "Запомнить меня" отмечено
+                if (rememberMe) {
+                    setCookie('rememberedUsername', username, 30);
+                    setCookie('rememberedPassword', password, 30);
+                } else {
+                    // Удаляем cookie, если "Запомнить меня" не отмечено
+                    deleteCookie('rememberedUsername');
+                    deleteCookie('rememberedPassword');
+                }
                 messageDiv.innerHTML = '<div class="success-message">Вход выполнен успешно!</div>';
-                
                 // Закрытие модального окна через 1 секунду
                 setTimeout(() => {
                     closeModal('loginModal');
@@ -1419,23 +1225,25 @@
                 messageDiv.innerHTML = '<div class="error-message">Неверное имя пользователя или пароль</div>';
             }
         }
-
+        
         // Выход из системы
         async function logout() {
             try {
                 await auth.signOut();
                 currentUser = null;
                 updateAuthUI();
+                // Удаляем cookie при выходе
+                deleteCookie('rememberedUsername');
+                deleteCookie('rememberedPassword');
             } catch (error) {
                 console.error("Ошибка выхода:", error);
             }
         }
-
+        
         // Обновление интерфейса авторизации
         function updateAuthUI() {
             const userInfo = document.getElementById('userInfo');
             const addAdBtn = document.getElementById('addAdBtn');
-            
             if (currentUser) {
                 userInfo.style.display = 'block';
                 document.getElementById('currentUser').textContent = `Привет, ${currentUser.username}!`;
@@ -1445,30 +1253,29 @@
                 addAdBtn.style.display = 'none';
             }
         }
-
+        
         // Открытие модального окна
         function openModal(modalId) {
             closeModalAll();
             document.getElementById(modalId).style.display = 'flex';
         }
-
+        
         // Закрытие модального окна
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
         }
-
+        
         // Закрытие всех модальных окон
         function closeModalAll() {
             document.querySelectorAll('.modal').forEach(modal => {
                 modal.style.display = 'none';
             });
         }
-
+        
         // Переключение темы системы
         function toggleSystemTheme() {
             const body = document.body;
             body.classList.toggle('system-theme');
-            
             // Меняем цвет фона для эффекта темы
             if (body.classList.contains('system-theme')) {
                 body.style.background = 'linear-gradient(135deg, #000000, #333333)';
@@ -1476,12 +1283,11 @@
                 body.style.background = 'linear-gradient(135deg, #0f0c29, #302b63, #24243e)';
             }
         }
-
+        
         // Переключение видимости email
         function toggleEmailVisibility() {
             const emailElement = document.querySelector('.contact-email');
             const hiddenEmailElement = document.getElementById('hiddenEmail');
-            
             if (hiddenEmailElement.classList.contains('hidden-email')) {
                 hiddenEmailElement.classList.remove('hidden-email');
                 hiddenEmailElement.classList.add('visible-email');
@@ -1492,83 +1298,70 @@
                 emailElement.innerHTML = 'poddershka24<span style="display:none">@</span>Gmail.com';
             }
         }
-
-        // Удаление объявления по ключу доступа
-        async function deleteAdvertisementByKey() {
-            const key = document.getElementById('deleteKey').value;
-            const adId = parseInt(document.getElementById('deleteAdId').value);
-            const messageDiv = document.getElementById('deleteMessage');
-
-            // Проверка ключа доступа
-            if (key !== DELETE_ACCESS_KEY) {
-                messageDiv.innerHTML = '<div class="error-message">Неверный ключ доступа</div>';
-                return;
+        
+        // === Работа с Cookie ===
+        // Установка cookie
+        function setCookie(name, value, days) {
+            const expires = new Date();
+            expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+            document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;SameSite=Lax;Secure`;
+        }
+        // Получение cookie
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
             }
-
-            // Проверка ID объявления
-            if (!adId || adId <= 0) {
-                messageDiv.innerHTML = '<div class="error-message">Пожалуйста, введите корректный ID объявления</div>';
-                return;
-            }
-
-            try {
-                // Удаляем из Realtime Database
-                await database.ref('advertisements/' + adId).remove();
-                
-                // Удаляем из локального массива
-                advertisements = advertisements.filter(a => a.id !== adId);
-                displayAdvertisements();
-                closeModal('deleteByKeyModal');
-                
-                // Очищаем поля формы
-                document.getElementById('deleteKey').value = '';
-                document.getElementById('deleteAdId').value = '';
-                
-                messageDiv.innerHTML = '<div class="success-message">Объявление успешно удалено!</div>';
-            } catch (error) {
-                console.error("Ошибка удаления:", error);
-                messageDiv.innerHTML = '<div class="error-message">Ошибка при удалении объявления</div>';
+            return null;
+        }
+        // Удаление cookie
+        function deleteCookie(name) {
+            document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+        }
+        // Автозаполнение полей входа из cookie
+        function autoFillLoginFields() {
+            const rememberedUsername = getCookie('rememberedUsername');
+            const rememberedPassword = getCookie('rememberedPassword');
+            if (rememberedUsername && rememberedPassword) {
+                document.getElementById('loginUsername').value = rememberedUsername;
+                document.getElementById('loginPassword').value = rememberedPassword;
+                document.getElementById('rememberMe').checked = true;
             }
         }
-
-        // Удаление объявления (для владельцев и админов)
-        async function deleteAdvertisement(adId) {
-            if (!currentUser) {
-                alert('Пожалуйста, войдите в систему');
-                return;
-            }
-
-            // Проверяем, является ли пользователь админом или владельцем объявления
-            const ad = advertisements.find(a => a.id === adId);
-            if (!ad) return;
-
-            if (currentUser.username !== "admin" && currentUser.id !== ad.userId) {
-                alert('У вас нет прав для удаления этого объявления');
-                return;
-            }
-
-            if (confirm('Вы уверены, что хотите удалить это объявление?')) {
+        
+        // Функция копирования номера QIWI
+        function copyQiwiNumber() {
+            // Номер QIWI (скрыт в коде)
+            const qiwiNumber = "+79022430888";
+            navigator.clipboard.writeText(qiwiNumber).then(() => {
+                alert("Номер QIWI скопирован в буфер обмена!");
+            }).catch(err => {
+                console.error("Ошибка при копировании: ", err);
+                // Альтернативный способ копирования для старых браузеров
+                const textArea = document.createElement("textarea");
+                textArea.value = qiwiNumber;
+                document.body.appendChild(textArea);
+                textArea.select();
                 try {
-                    // Удаляем из Realtime Database
-                    await database.ref('advertisements/' + adId).remove();
-                    
-                    // Удаляем из локального массива
-                    advertisements = advertisements.filter(a => a.id !== adId);
-                    displayAdvertisements();
-                } catch (error) {
-                    console.error("Ошибка удаления:", error);
-                    alert("Ошибка при удалении объявления");
+                    document.execCommand('copy');
+                    alert("Номер QIWI скопирован в буфер обмена!");
+                } catch (err) {
+                    console.error("Ошибка при копировании: ", err);
+                    alert("Не удалось скопировать номер. Пожалуйста, скопируйте его вручную: " + qiwiNumber);
                 }
-            }
+                document.body.removeChild(textArea);
+            });
         }
-
+        
         // Загрузка объявлений из Realtime Database
         function loadAdvertisements() {
             // Отслеживаем изменения в Realtime Database
             database.ref('advertisements').on('value', function(snapshot) {
                 const data = snapshot.val();
                 advertisements = [];
-                
                 if (data) {
                     // Преобразуем объект в массив
                     Object.keys(data).forEach(key => {
@@ -1577,29 +1370,24 @@
                         advertisements.push(ad);
                     });
                 }
-                
                 displayAdvertisements();
             });
         }
-
+        
         // Инициализация страницы
         document.addEventListener('DOMContentLoaded', function() {
             // Загружаем объявления из Realtime Database
             loadAdvertisements();
-            
             // Добавляем обработчик события для поиска при нажатии Enter
             document.getElementById('searchInput').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     searchAds();
                 }
             });
-
             // Обновляем UI при загрузке
             updateAuthUI();
-            
             // Создаем эффекты видеокарты
             createGPUParticles();
-            
             // Проверяем статус авторизации Firebase
             auth.onAuthStateChanged(function(user) {
                 if (user) {
@@ -1608,8 +1396,10 @@
                     console.log("Пользователь не авторизован");
                 }
             });
+            // Автозаполнение полей входа
+            autoFillLoginFields();
         });
-
+        
         // Закрытие модальных окон при клике вне их области
         window.onclick = function(event) {
             document.querySelectorAll('.modal').forEach(modal => {
@@ -1618,7 +1408,7 @@
                 }
             });
         }
-
+        
         // Добавляем защиту на уровне браузера
         window.addEventListener('load', function() {
             console.log('🔒 Сайт защищен от DDoS атак и взломов');
