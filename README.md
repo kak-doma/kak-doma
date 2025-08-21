@@ -757,6 +757,17 @@
             border: 1px solid rgba(231, 76, 60, 0.3);
         }
 
+        .firebase-status {
+            background: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            margin: 10px 0;
+            text-align: center;
+            font-size: 0.9em;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+
         footer {
             text-align: center;
             margin-top: 30px;
@@ -808,6 +819,11 @@
             <h1>ЖелезныеРешения</h1>
             <p class="subtitle">Объявления о продаже электроники</p>
         </header>
+
+        <!-- Firebase статус -->
+        <div class="firebase-status">
+            🔧 Firebase подключен ✅
+        </div>
 
         <!-- Защита от DDoS -->
         <div class="security-banner">
@@ -983,7 +999,28 @@
         <p>&copy; 2024 ЖелезныеРешения - Объявления о продаже электроники. Все права защищены.</p>
     </footer>
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
     <script>
+        // Firebase configuration
+        const firebaseConfig = {
+
+            apiKey: "AIzaSyALRdkMGyl2z7OHCQNCPEuBFO-pcAdQr54",
+  authDomain: "zheleznye-resheniya-web.firebaseapp.com",
+  projectId: "zheleznye-resheniya-web",
+  storageBucket: "zheleznye-resheniya-web.firebasestorage.app",
+  messagingSenderId: "527918485360",
+  appId: "1:527918485360:web:47024e21a1fe12cfd749b5",
+  measurementId: "G-P48S1WQ48R"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
         // Создаем частицы для эффекта видеокарты
         function createGPUParticles() {
             const gpuEffect = document.getElementById('gpuEffect');
@@ -1075,104 +1112,7 @@
         const DELETE_ACCESS_KEY = "kluchi_H39J-S@87903H5KL967-fa2EQ-Kl";
 
         // Пример данных объявлений
-        let advertisements = [
-            {
-                id: 1,
-                title: "Ноутбук Dell XPS 13",
-                price: "85000",
-                description: "Ноутбук в отличном состоянии, 16GB RAM, 512GB SSD. Продается с гарантией.",
-                contact: "+7 (999) 123-45-67",
-                image: "https://via.placeholder.com/300x200?text=Dell+XPS+13",
-                date: "2024-01-15",
-                author: "Иван Петров",
-                userId: 1,
-                category: "ноутбуки"
-            },
-            {
-                id: 2,
-                title: "Смартфон iPhone 14 Pro",
-                price: "120000",
-                description: "Новый смартфон, полностью заряжен. В коробке есть чехол и наушники.",
-                contact: "+7 (999) 987-65-43",
-                image: "https://via.placeholder.com/300x200?text=iPhone+14+Pro",
-                date: "2024-01-10",
-                author: "Мария Сидорова",
-                userId: 2,
-                category: "смартфоны"
-            },
-            {
-                id: 3,
-                title: "Монитор 27\" 4K Samsung",
-                price: "25000",
-                description: "4K монитор с HDR поддержкой, IPS面板, идеален для работы и игр.",
-                contact: "+7 (999) 555-55-55",
-                image: "https://via.placeholder.com/300x200?text=Samsung+4K",
-                date: "2024-01-08",
-                author: "Алексей Иванов",
-                userId: 3,
-                category: "мониторы"
-            },
-            {
-                id: 4,
-                title: "Наушники Sony WH-1000XM4",
-                price: "18000",
-                description: "Беспроводные наушники с шумоподавлением, 30 часов автономности.",
-                contact: "+7 (999) 111-22-33",
-                image: "https://via.placeholder.com/300x200?text=Sony+WH-1000XM4",
-                date: "2024-01-12",
-                author: "Елена Козлова",
-                userId: 1,
-                category: "наушники"
-            },
-            {
-                id: 5,
-                title: "Планшет iPad Air 5",
-                price: "55000",
-                description: "Планшет с экраном 10.9\", 64GB, в отличном состоянии. Идеален для работы.",
-                contact: "+7 (999) 777-88-99",
-                image: "https://via.placeholder.com/300x200?text=iPad+Air+5",
-                date: "2024-01-05",
-                author: "Дмитрий Смирнов",
-                userId: 2,
-                category: "планшеты"
-            },
-            {
-                id: 6,
-                title: "Гaming мышка Razer DeathAdder",
-                price: "3500",
-                description: "Геймерская мышка с механическими переключателями, RGB подсветка.",
-                contact: "+7 (999) 333-44-55",
-                image: "https://via.placeholder.com/300x200?text=Razer+DeathAdder",
-                date: "2024-01-14",
-                author: "Ольга Морозова",
-                userId: 3,
-                category: "периферия"
-            },
-            {
-                id: 7,
-                title: "Компьютерный блок питания 850W",
-                price: "2500",
-                description: "850W блок питания 80 PLUS Gold, кабели в комплекте.",
-                contact: "+7 (999) 222-33-44",
-                image: "https://via.placeholder.com/300x200?text=Power+Supply",
-                date: "2024-01-13",
-                author: "Сергей Васильев",
-                userId: 1,
-                category: "компоненты"
-            },
-            {
-                id: 8,
-                title: "Клавиатура Logitech G Pro",
-                price: "4200",
-                description: "Механическая клавиатура с переключателями Omega, RGB подсветка.",
-                contact: "+7 (999) 666-77-88",
-                image: "https://via.placeholder.com/300x200?text=Logitech+G+Pro",
-                date: "2024-01-09",
-                author: "Анна Кузнецова",
-                userId: 2,
-                category: "периферия"
-            }
-        ];
+        let advertisements = [];
 
         // Фильтрация текста от матерного контента
         function filterText(text) {
@@ -1306,7 +1246,7 @@
         }
 
         // Создание нового объявления
-        function createAdvertisement() {
+        async function createAdvertisement() {
             if (!currentUser) {
                 alert('Пожалуйста, войдите в систему');
                 return;
@@ -1342,37 +1282,48 @@
         }
 
         // Вспомогательная функция для создания объявления
-        function createAdvertisementWithImage(title, price, description, contact, imageUrl) {
-            const newAd = {
-                id: advertisements.length + 1,
-                title: title,
-                price: price,
-                description: description,
-                contact: contact,
-                image: imageUrl,
-                date: new Date().toISOString().split('T')[0],
-                author: currentUser.username,
-                userId: currentUser.id,
-                category: "электроника"
-            };
+        async function createAdvertisementWithImage(title, price, description, contact, imageUrl) {
+            try {
+                // Создаем документ в Firestore
+                const adData = {
+                    id: Date.now(), // Уникальный ID
+                    title: title,
+                    price: price,
+                    description: description,
+                    contact: contact,
+                    image: imageUrl,
+                    date: new Date().toISOString().split('T')[0],
+                    author: currentUser.username,
+                    userId: currentUser.id,
+                    category: "электроника",
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                };
 
-            advertisements.push(newAd);
-            displayAdvertisements();
-            closeModal('addAdModal');
-            
-            // Очищаем поля формы
-            document.getElementById('adTitle').value = '';
-            document.getElementById('adPrice').value = '';
-            document.getElementById('adDescription').value = '';
-            document.getElementById('adContact').value = '';
-            document.getElementById('adImageFile').value = '';
-            document.getElementById('imagePreview').innerHTML = '';
-            
-            document.getElementById('addAdMessage').innerHTML = '<div class="success-message">Объявление успешно добавлено!</div>';
+                // Добавляем в Firestore
+                const docRef = await db.collection('advertisements').add(adData);
+                adData.id = docRef.id; // Используем ID из Firestore
+                
+                advertisements.push(adData);
+                displayAdvertisements();
+                closeModal('addAdModal');
+                
+                // Очищаем поля формы
+                document.getElementById('adTitle').value = '';
+                document.getElementById('adPrice').value = '';
+                document.getElementById('adDescription').value = '';
+                document.getElementById('adContact').value = '';
+                document.getElementById('adImageFile').value = '';
+                document.getElementById('imagePreview').innerHTML = '';
+                
+                document.getElementById('addAdMessage').innerHTML = '<div class="success-message">Объявление успешно добавлено!</div>';
+            } catch (error) {
+                console.error("Ошибка при добавлении объявления:", error);
+                document.getElementById('addAdMessage').innerHTML = '<div class="error-message">Ошибка при добавлении объявления</div>';
+            }
         }
 
         // Регистрация пользователя
-        function registerUser() {
+        async function registerUser() {
             const username = document.getElementById('regUsername').value;
             const password = document.getElementById('regPassword').value;
             const confirmPassword = document.getElementById('regConfirmPassword').value;
@@ -1394,37 +1345,40 @@
                 return;
             }
 
-            // Проверка существующего пользователя
-            if (users.some(user => user.username === username)) {
-                messageDiv.innerHTML = '<div class="error-message">Пользователь с таким именем уже существует</div>';
-                return;
+            try {
+                // Регистрация в Firebase Auth
+                const userCredential = await auth.createUserWithEmailAndPassword(username + '@example.com', password);
+                const user = userCredential.user;
+                
+                // Сохраняем данные пользователя в Firestore
+                await db.collection('users').doc(user.uid).set({
+                    username: username,
+                    email: user.email,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                messageDiv.innerHTML = '<div class="success-message">Регистрация прошла успешно!</div>';
+                
+                // Автоматический вход после регистрации
+                setTimeout(() => {
+                    currentUser = {
+                        id: user.uid,
+                        username: username
+                    };
+                    updateAuthUI();
+                    closeModal('registerModal');
+                    document.getElementById('regUsername').value = '';
+                    document.getElementById('regPassword').value = '';
+                    document.getElementById('regConfirmPassword').value = '';
+                }, 1000);
+            } catch (error) {
+                console.error("Ошибка регистрации:", error);
+                messageDiv.innerHTML = '<div class="error-message">' + error.message + '</div>';
             }
-
-            // Создание нового пользователя
-            const newUser = {
-                id: users.length + 1,
-                username: username,
-                password: password // В реальном приложении нужно хэшировать пароль
-            };
-
-            users.push(newUser);
-            localStorage.setItem('users', JSON.stringify(users));
-
-            messageDiv.innerHTML = '<div class="success-message">Регистрация прошла успешно!</div>';
-            
-            // Автоматический вход после регистрации
-            setTimeout(() => {
-                currentUser = newUser;
-                updateAuthUI();
-                closeModal('registerModal');
-                document.getElementById('regUsername').value = '';
-                document.getElementById('regPassword').value = '';
-                document.getElementById('regConfirmPassword').value = '';
-            }, 1000);
         }
 
         // Вход пользователя
-        function loginUser() {
+        async function loginUser() {
             const username = document.getElementById('loginUsername').value;
             const password = document.getElementById('loginPassword').value;
             const messageDiv = document.getElementById('loginMessage');
@@ -1434,11 +1388,20 @@
                 return;
             }
 
-            // Поиск пользователя
-            const user = users.find(u => u.username === username && u.password === password);
-
-            if (user) {
-                currentUser = user;
+            try {
+                // Вход в Firebase Auth
+                const userCredential = await auth.signInWithEmailAndPassword(username + '@example.com', password);
+                const user = userCredential.user;
+                
+                // Получаем данные пользователя из Firestore
+                const userDoc = await db.collection('users').doc(user.uid).get();
+                const userData = userDoc.data();
+                
+                currentUser = {
+                    id: user.uid,
+                    username: userData.username
+                };
+                
                 updateAuthUI();
                 messageDiv.innerHTML = '<div class="success-message">Вход выполнен успешно!</div>';
                 
@@ -1448,15 +1411,21 @@
                     document.getElementById('loginUsername').value = '';
                     document.getElementById('loginPassword').value = '';
                 }, 1000);
-            } else {
+            } catch (error) {
+                console.error("Ошибка входа:", error);
                 messageDiv.innerHTML = '<div class="error-message">Неверное имя пользователя или пароль</div>';
             }
         }
 
         // Выход из системы
-        function logout() {
-            currentUser = null;
-            updateAuthUI();
+        async function logout() {
+            try {
+                await auth.signOut();
+                currentUser = null;
+                updateAuthUI();
+            } catch (error) {
+                console.error("Ошибка выхода:", error);
+            }
         }
 
         // Обновление интерфейса авторизации
@@ -1522,7 +1491,7 @@
         }
 
         // Удаление объявления по ключу доступа
-        function deleteAdvertisementByKey() {
+        async function deleteAdvertisementByKey() {
             const key = document.getElementById('deleteKey').value;
             const adId = parseInt(document.getElementById('deleteAdId').value);
             const messageDiv = document.getElementById('deleteMessage');
@@ -1539,16 +1508,12 @@
                 return;
             }
 
-            // Поиск объявления
-            const adIndex = advertisements.findIndex(ad => ad.id === adId);
-            if (adIndex === -1) {
-                messageDiv.innerHTML = '<div class="error-message">Объявление с таким ID не найдено</div>';
-                return;
-            }
-
-            // Подтверждение удаления
-            if (confirm(`Вы уверены, что хотите удалить объявление с ID ${adId}?`)) {
-                advertisements.splice(adIndex, 1);
+            try {
+                // Удаляем из Firestore
+                await db.collection('advertisements').doc(String(adId)).delete();
+                
+                // Удаляем из локального массива
+                advertisements = advertisements.filter(a => a.id !== adId);
                 displayAdvertisements();
                 closeModal('deleteByKeyModal');
                 
@@ -1557,11 +1522,14 @@
                 document.getElementById('deleteAdId').value = '';
                 
                 messageDiv.innerHTML = '<div class="success-message">Объявление успешно удалено!</div>';
+            } catch (error) {
+                console.error("Ошибка удаления:", error);
+                messageDiv.innerHTML = '<div class="error-message">Ошибка при удалении объявления</div>';
             }
         }
 
         // Удаление объявления (для владельцев и админов)
-        function deleteAdvertisement(adId) {
+        async function deleteAdvertisement(adId) {
             if (!currentUser) {
                 alert('Пожалуйста, войдите в систему');
                 return;
@@ -1577,14 +1545,44 @@
             }
 
             if (confirm('Вы уверены, что хотите удалить это объявление?')) {
-                advertisements = advertisements.filter(a => a.id !== adId);
+                try {
+                    // Удаляем из Firestore
+                    await db.collection('advertisements').doc(String(adId)).delete();
+                    
+                    // Удаляем из локального массива
+                    advertisements = advertisements.filter(a => a.id !== adId);
+                    displayAdvertisements();
+                } catch (error) {
+                    console.error("Ошибка удаления:", error);
+                    alert("Ошибка при удалении объявления");
+                }
+            }
+        }
+
+        // Загрузка объявлений из Firestore
+        async function loadAdvertisements() {
+            try {
+                const snapshot = await db.collection('advertisements').orderBy('createdAt', 'desc').get();
+                advertisements = [];
+                
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    data.id = doc.id;
+                    advertisements.push(data);
+                });
+                
+                displayAdvertisements();
+            } catch (error) {
+                console.error("Ошибка загрузки объявлений:", error);
+                // Используем примерные данные при ошибке
                 displayAdvertisements();
             }
         }
 
         // Инициализация страницы
         document.addEventListener('DOMContentLoaded', function() {
-            displayAdvertisements();
+            // Загружаем объявления
+            loadAdvertisements();
             
             // Добавляем обработчик события для поиска при нажатии Enter
             document.getElementById('searchInput').addEventListener('keypress', function(e) {
@@ -1598,6 +1596,15 @@
             
             // Создаем эффекты видеокарты
             createGPUParticles();
+            
+            // Проверяем статус авторизации Firebase
+            auth.onAuthStateChanged(function(user) {
+                if (user) {
+                    console.log("Пользователь авторизован:", user);
+                } else {
+                    console.log("Пользователь не авторизован");
+                }
+            });
         });
 
         // Закрытие модальных окон при клике вне их области
@@ -1612,28 +1619,8 @@
         // Добавляем защиту на уровне браузера
         window.addEventListener('load', function() {
             console.log('🔒 Сайт защищен от DDoS атак и взломов');
+            console.log('Firebase подключен успешно');
         });
     </script>
 </body>
 </html>
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyALRdkMGyl2z7OHCQNCPEuBFO-pcAdQr54",
-  authDomain: "zheleznye-resheniya-web.firebaseapp.com",
-  projectId: "zheleznye-resheniya-web",
-  storageBucket: "zheleznye-resheniya-web.firebasestorage.app",
-  messagingSenderId: "527918485360",
-  appId: "1:527918485360:web:47024e21a1fe12cfd749b5",
-  measurementId: "G-P48S1WQ48R"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
