@@ -757,7 +757,7 @@
             border: 1px solid rgba(231, 76, 60, 0.3);
         }
 
-        .firebase-status {
+        .realtime-status {
             background: rgba(52, 152, 219, 0.2);
             color: #3498db;
             padding: 10px;
@@ -820,9 +820,9 @@
             <p class="subtitle">Объявления о продаже электроники</p>
         </header>
 
-        <!-- Firebase статус -->
-        <div class="firebase-status">
-            🔧 Firebase подключен ✅
+        <!-- Realtime Database статус -->
+        <div class="realtime-status">
+            🔥 Realtime Database подключен ✅
         </div>
 
         <!-- Защита от DDoS -->
@@ -1002,24 +1002,24 @@
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 
     <script>
         // Firebase configuration
         const firebaseConfig = {
-
             apiKey: "AIzaSyALRdkMGyl2z7OHCQNCPEuBFO-pcAdQr54",
-  authDomain: "zheleznye-resheniya-web.firebaseapp.com",
-  projectId: "zheleznye-resheniya-web",
-  storageBucket: "zheleznye-resheniya-web.firebasestorage.app",
-  messagingSenderId: "527918485360",
-  appId: "1:527918485360:web:47024e21a1fe12cfd749b5",
-  measurementId: "G-P48S1WQ48R"
-};
+            authDomain: "zheleznye-resheniya-web.firebaseapp.com",
+            databaseURL: "https://zheleznye-resheniya-web-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "zheleznye-resheniya-web",
+            storageBucket: "zheleznye-resheniya-web.firebasestorage.app",
+            messagingSenderId: "527918485360",
+            appId: "1:527918485360:web:180b3899827e2b1cd749b5"
+        };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const auth = firebase.auth();
 
         // Создаем частицы для эффекта видеокарты
         function createGPUParticles() {
@@ -1284,9 +1284,12 @@ const analytics = getAnalytics(app);
         // Вспомогательная функция для создания объявления
         async function createAdvertisementWithImage(title, price, description, contact, imageUrl) {
             try {
-                // Создаем документ в Firestore
+                // Генерируем уникальный ID для Realtime Database
+                const newAdKey = database.ref().child('advertisements').push().key;
+                
+                // Создаем данные для объявления
                 const adData = {
-                    id: Date.now(), // Уникальный ID
+                    id: newAdKey,
                     title: title,
                     price: price,
                     description: description,
@@ -1296,13 +1299,13 @@ const analytics = getAnalytics(app);
                     author: currentUser.username,
                     userId: currentUser.id,
                     category: "электроника",
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    createdAt: firebase.database.ServerValue.TIMESTAMP
                 };
 
-                // Добавляем в Firestore
-                const docRef = await db.collection('advertisements').add(adData);
-                adData.id = docRef.id; // Используем ID из Firestore
+                // Добавляем в Realtime Database
+                await database.ref('advertisements/' + newAdKey).set(adData);
                 
+                // Добавляем в локальный массив
                 advertisements.push(adData);
                 displayAdvertisements();
                 closeModal('addAdModal');
@@ -1350,11 +1353,11 @@ const analytics = getAnalytics(app);
                 const userCredential = await auth.createUserWithEmailAndPassword(username + '@example.com', password);
                 const user = userCredential.user;
                 
-                // Сохраняем данные пользователя в Firestore
-                await db.collection('users').doc(user.uid).set({
+                // Сохраняем данные пользователя в Realtime Database
+                await database.ref('users/' + user.uid).set({
                     username: username,
                     email: user.email,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    createdAt: firebase.database.ServerValue.TIMESTAMP
                 });
                 
                 messageDiv.innerHTML = '<div class="success-message">Регистрация прошла успешно!</div>';
@@ -1393,9 +1396,9 @@ const analytics = getAnalytics(app);
                 const userCredential = await auth.signInWithEmailAndPassword(username + '@example.com', password);
                 const user = userCredential.user;
                 
-                // Получаем данные пользователя из Firestore
-                const userDoc = await db.collection('users').doc(user.uid).get();
-                const userData = userDoc.data();
+                // Получаем данные пользователя из Realtime Database
+                const userSnapshot = await database.ref('users/' + user.uid).once('value');
+                const userData = userSnapshot.val();
                 
                 currentUser = {
                     id: user.uid,
@@ -1509,8 +1512,8 @@ const analytics = getAnalytics(app);
             }
 
             try {
-                // Удаляем из Firestore
-                await db.collection('advertisements').doc(String(adId)).delete();
+                // Удаляем из Realtime Database
+                await database.ref('advertisements/' + adId).remove();
                 
                 // Удаляем из локального массива
                 advertisements = advertisements.filter(a => a.id !== adId);
@@ -1546,8 +1549,8 @@ const analytics = getAnalytics(app);
 
             if (confirm('Вы уверены, что хотите удалить это объявление?')) {
                 try {
-                    // Удаляем из Firestore
-                    await db.collection('advertisements').doc(String(adId)).delete();
+                    // Удаляем из Realtime Database
+                    await database.ref('advertisements/' + adId).remove();
                     
                     // Удаляем из локального массива
                     advertisements = advertisements.filter(a => a.id !== adId);
@@ -1559,29 +1562,29 @@ const analytics = getAnalytics(app);
             }
         }
 
-        // Загрузка объявлений из Firestore
-        async function loadAdvertisements() {
-            try {
-                const snapshot = await db.collection('advertisements').orderBy('createdAt', 'desc').get();
+        // Загрузка объявлений из Realtime Database
+        function loadAdvertisements() {
+            // Отслеживаем изменения в Realtime Database
+            database.ref('advertisements').on('value', function(snapshot) {
+                const data = snapshot.val();
                 advertisements = [];
                 
-                snapshot.forEach(doc => {
-                    const data = doc.data();
-                    data.id = doc.id;
-                    advertisements.push(data);
-                });
+                if (data) {
+                    // Преобразуем объект в массив
+                    Object.keys(data).forEach(key => {
+                        const ad = data[key];
+                        ad.id = key; // Сохраняем ключ как ID
+                        advertisements.push(ad);
+                    });
+                }
                 
                 displayAdvertisements();
-            } catch (error) {
-                console.error("Ошибка загрузки объявлений:", error);
-                // Используем примерные данные при ошибке
-                displayAdvertisements();
-            }
+            });
         }
 
         // Инициализация страницы
         document.addEventListener('DOMContentLoaded', function() {
-            // Загружаем объявления
+            // Загружаем объявления из Realtime Database
             loadAdvertisements();
             
             // Добавляем обработчик события для поиска при нажатии Enter
@@ -1619,7 +1622,7 @@ const analytics = getAnalytics(app);
         // Добавляем защиту на уровне браузера
         window.addEventListener('load', function() {
             console.log('🔒 Сайт защищен от DDoS атак и взломов');
-            console.log('Firebase подключен успешно');
+            console.log('Realtime Database подключен успешно');
         });
     </script>
 </body>
